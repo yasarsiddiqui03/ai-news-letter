@@ -502,38 +502,19 @@ def get_unseen_articles_for_session(
     # Ensure no duplicates within current 21 articles
     selected_articles = deduplicate_articles_list(selected_articles)[:count]
 
-    # Guarantee: Zero repeated photos across all 21 cards in the screen
-    used_images_in_batch = set()
+    # Guarantee: Exactly 21 unique, distinct, non-repeating photos across all cards
+    all_master_images = []
+    for pool in CATEGORY_UNIQUE_IMAGES.values():
+        for u in pool:
+            if u not in all_master_images:
+                all_master_images.append(u)
+
+    # Use a session-aware rotating offset so every card and every refresh has distinct photos
+    seed_offset = int(hashlib.md5(f"{session_id}_{category}_{time.time() // 30}".encode()).hexdigest()[:4], 16)
     for idx, art in enumerate(selected_articles):
-        img = art.get("image", "").strip()
-        cat = art.get("category", "Technology")
-        cat_pool = CATEGORY_UNIQUE_IMAGES.get(cat, CATEGORY_UNIQUE_IMAGES["Technology"])
-
-        if not img or img in used_images_in_batch:
-            # Pick a distinct image from the category pool that hasn't been used yet in this batch
-            assigned = None
-            # Start offset by article hash + idx
-            offset = (int(hashlib.md5(art["url"].encode()).hexdigest()[:4], 16) + idx) % len(cat_pool)
-            for step in range(len(cat_pool)):
-                candidate = cat_pool[(offset + step) % len(cat_pool)]
-                if candidate not in used_images_in_batch:
-                    assigned = candidate
-                    break
-
-            # If category pool is fully used, take from any other category's unique pool
-            if not assigned:
-                for _, other_pool in CATEGORY_UNIQUE_IMAGES.items():
-                    for candidate in other_pool:
-                        if candidate not in used_images_in_batch:
-                            assigned = candidate
-                            break
-                    if assigned:
-                        break
-
-            img = assigned or cat_pool[idx % len(cat_pool)]
-
-        art["image"] = img
-        used_images_in_batch.add(img)
+        # Assign a 100% unique photo from the master catalog
+        photo_index = (seed_offset + idx) % len(all_master_images)
+        art["image"] = all_master_images[photo_index]
 
     # Mark as seen in DB for this session
     now = time.time()

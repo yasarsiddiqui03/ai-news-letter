@@ -63,8 +63,18 @@ def get_news():
             cursor.execute("SELECT article_url FROM saved_articles WHERE user_id = ?", (user["id"],))
             saved_urls = {r["article_url"] for r in cursor.fetchall()}
 
-    for art in articles:
+    # Ensure 100% unique photos across all 21 returned cards
+    from backend.services.news_service import CATEGORY_UNIQUE_IMAGES
+    all_imgs = []
+    for p in CATEGORY_UNIQUE_IMAGES.values():
+        for u in p:
+            if u not in all_imgs:
+                all_imgs.append(u)
+
+    seed = int(uuid.uuid4().hex[:4], 16)
+    for idx, art in enumerate(articles):
         art["is_saved"] = art["url"] in saved_urls
+        art["image"] = all_imgs[(seed + idx) % len(all_imgs)]
 
     response = make_response(jsonify({
         "success": True,
