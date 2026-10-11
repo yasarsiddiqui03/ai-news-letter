@@ -3,23 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI NEWS LETTER — Real-Time Curated AI Intelligence Terminal</title>
+  <title>AI NEWS LETTER — Real-Time Curated AI Intelligence</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/start.css">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 </head>
 <body class="start-body">
 
+  <!-- Interactive Canvas Particle Simulation -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Volumetric Aurora Lights & Perspective Grid -->
+  <div class="aurora-glow-1"></div>
+  <div class="aurora-glow-2"></div>
+  <div class="cyber-grid-floor"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="start-nav">
+    <div class="start-nav-inner">
+      <a href="home.html" class="start-brand">
+        <span class="start-brand-icon">⚡</span>
+        <span class="start-brand-text">AI NEWS <strong>LETTER</strong></span>
+        <span class="start-brand-badge">EDITION 2026</span>
+      </a>
+
+      <div class="start-nav-center">
+        <span class="live-dot"></span>
+        <span class="live-text">21 Fresh Stories Curated • Zero Repeat Feed</span>
+      </div>
+
+      <div class="start-nav-actions">
+        <a href="home.html" class="start-nav-cta">
+          <span>Read Today's News 📰</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
   <!-- Breaking Live AI Marquee Ticker -->
   <aside class="ticker-wrap" aria-label="Live AI Breaking News">
-    <div class="ticker-badge">LIVE INTEL</div>
+    <div class="ticker-badge">⚡ LIVE INTEL</div>
     <div class="ticker-move">
       <span class="ticker-item">⚡ <strong>FRONTIER AI:</strong> Autonomous Multi-Agent Reasoning Achieves New Benchmark Milestones</span>
       <span class="ticker-item">🧬 <strong>QUANTUM LEAP:</strong> Silicon Quantum Processors Reach 10,000 Qubits Coherence</span>
       <span class="ticker-item">🛡️ <strong>CYBER SHIELD:</strong> Zero-Day Neural Vulnerability Patches Deployed Globally</span>
       <span class="ticker-item">🚀 <strong>VENTURE SURGE:</strong> Generative AI Capital Inflow Exceeds $40B in Q4</span>
       <span class="ticker-item">🌐 <strong>GLOBAL POLICY:</strong> Multi-Nation AI Safety Treaty Signed at Summit</span>
-      <!-- Duplicate for infinite marquee loop -->
+      <!-- Marquee loop duplicate -->
       <span class="ticker-item">⚡ <strong>FRONTIER AI:</strong> Autonomous Multi-Agent Reasoning Achieves New Benchmark Milestones</span>
       <span class="ticker-item">🧬 <strong>QUANTUM LEAP:</strong> Silicon Quantum Processors Reach 10,000 Qubits Coherence</span>
       <span class="ticker-item">🛡️ <strong>CYBER SHIELD:</strong> Zero-Day Neural Vulnerability Patches Deployed Globally</span>
@@ -28,57 +58,76 @@
     </div>
   </aside>
 
-  <!-- Interactive Canvas Particle Simulation -->
-  <canvas id="particle-canvas"></canvas>
-
-  <!-- Volumetric Aurora Lights -->
-  <div class="aurora-glow-1"></div>
-  <div class="aurora-glow-2"></div>
-
-  <!-- Perspective Cyber Grid Floor -->
-  <div class="cyber-grid-floor"></div>
-
-  <!-- Central Hologram Terminal Card -->
+  <!-- Main Hero Editorial Stage -->
   <main class="start-content-wrapper">
-    <div class="start-badge">
-      <span class="radar-ping"></span>
-      <span>Autonomous Intelligence Feed v2.6</span>
+    <div class="start-hero-card">
+      <div class="start-badge">
+        <span class="radar-ping"></span>
+        <span>Real-Time Curated AI Intelligence Feed</span>
+      </div>
+
+      <h1 class="start-title">
+        AI NEWS <span class="gradient-text">LETTER</span>
+      </h1>
+
+      <p class="start-tagline">
+        The Zero-Repeat Executive Terminal for Frontier AI, Science & Tech
+      </p>
+
+      <p class="start-description">
+        Curating up-to-the-minute global breakthroughs across Artificial Intelligence, Frontier Science, Cyber Defense, and Venture Capital. Every session delivers 21 completely fresh, non-repeating stories with instant Gemini AI executive synthesis.
+      </p>
+
+      <!-- Primary Action Buttons -->
+      <div class="start-cta-group">
+        <button id="explore-btn" class="btn-explore" aria-label="Launch News Feed">
+          <span>Explore 21 News Stories</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+        <a href="home.html#summarizer" class="btn-summarizer-cta">
+          <span>🧠 Try AI Summarizer</span>
+        </a>
+      </div>
+
+      <!-- Quick Category Navigator -->
+      <div class="start-categories-section">
+        <span class="start-cat-label">Quick Jump to Category:</span>
+        <div class="start-cat-pills">
+          <a href="home.html?category=Technology" class="start-cat-chip">💻 Technology</a>
+          <a href="home.html?category=AI" class="start-cat-chip">🧠 AI</a>
+          <a href="home.html?category=Science" class="start-cat-chip">🔬 Science</a>
+          <a href="home.html?category=Startups" class="start-cat-chip">🚀 Startups</a>
+          <a href="home.html?category=Business" class="start-cat-chip">💼 Business</a>
+          <a href="home.html?category=Cyber%20Security" class="start-cat-chip">🛡️ Cyber Security</a>
+          <a href="home.html?category=World%20News" class="start-cat-chip">🌐 World News</a>
+        </div>
+      </div>
+
+      <!-- Professional Value Highlights -->
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon">🔄</div>
+          <div class="feature-title">Zero-Repeat Feed</div>
+          <div class="feature-desc">Guaranteed 21 new, unseen articles per refresh. Tracked in database so you never read duplicates.</div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🧠</div>
+          <div class="feature-title">Gemini AI Synthesis</div>
+          <div class="feature-desc">Executive 5-7 point summaries for every article, plus on-demand long-text analysis tool.</div>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🛡️</div>
+          <div class="feature-title">Verified Global Sources</div>
+          <div class="feature-desc">High-signal news aggregated from MIT, arXiv, Bloomberg, TechCrunch, and top journals.</div>
+        </div>
+      </div>
     </div>
-
-    <h1 class="start-title">
-      AI NEWS <span>LETTER</span>
-    </h1>
-
-    <p class="start-tagline">
-      Unfiltered frontier breakthroughs. Synthesized in real time.
-    </p>
-
-    <p class="start-description">
-      An award-winning editorial intelligence platform aggregating up-to-the-minute global breakthroughs across Artificial Intelligence, Frontier Science, Cyber Defense, and Venture Capital. Zero duplicated news, automated deduplication, and instant Gemini AI synthesis.
-    </p>
-
-    <!-- Floating Stats HUD -->
-    <div class="stats-hud-grid">
-      <div class="stat-hud-pill">
-        <span>⚡</span> <span>Briefings: <strong>21 Unseen Cards</strong></span>
-      </div>
-      <div class="stat-hud-pill">
-        <span>🛡️</span> <span>Repetition: <strong>0% Duplicate Rate</strong></span>
-      </div>
-      <div class="stat-hud-pill">
-        <span>🧠</span> <span>Synthesis: <strong>Gemini Neural Core</strong></span>
-      </div>
-    </div>
-
-    <button id="explore-btn" class="btn-explore" aria-label="Launch AI Intelligence Terminal">
-      <span>Launch Intelligence</span>
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="5" y1="12" x2="19" y2="12"></line>
-        <polyline points="12 5 19 12 12 19"></polyline>
-      </svg>
-    </button>
   </main>
 
+  <!-- Scripts -->
   <script src="js/api.js"></script>
   <script src="js/start.js"></script>
 </body>

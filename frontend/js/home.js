@@ -9,6 +9,21 @@ const Home = {
 
   init() {
     API.initTheme();
+
+    // Check if category is passed via URL query param (e.g. home.html?category=AI)
+    const urlParams = new URLSearchParams(window.location.search);
+    const catParam = urlParams.get("category");
+    if (catParam) {
+      this.activeCategory = catParam;
+      document.querySelectorAll(".cat-btn").forEach((btn) => {
+        if (btn.dataset.category.toLowerCase() === catParam.toLowerCase()) {
+          btn.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+    }
+
     this.bindEvents();
     this.loadNews(false);
   },
