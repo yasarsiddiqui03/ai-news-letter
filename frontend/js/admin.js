@@ -151,8 +151,11 @@ const Admin = {
         this.showView("2fa");
         const totpInput = document.getElementById("admin-totp-input");
         if (totpInput) {
-          totpInput.value = "";
+          totpInput.value = res.dev_totp_code || "";
           totpInput.focus();
+        }
+        if (res.dev_totp_code) {
+          API.showToast(`Authenticator Code: ${res.dev_totp_code}`, "info");
         }
       }
     } catch (err) {
