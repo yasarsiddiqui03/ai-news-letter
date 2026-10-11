@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI NEWS LETTER — Real-Time Curated AI Intelligence</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="/home.html" class="nav-brand" aria-label="AI News Letter Homepage">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">AI NEWS <span>LETTER</span></div>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-wrapper">
+        <span class="search-icon-left">🔍</span>
+        <input 
+          type="text" 
+          id="search-input" 
+          class="search-input" 
+          placeholder="Search AI, robotics, breakthroughs..." 
+          autocomplete="off"
+        >
+        <button id="search-clear" class="search-clear-btn" aria-label="Clear search">✕</button>
+      </div>
+
+      <!-- Navigation Actions -->
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle theme mode" aria-label="Toggle theme">☀️</button>
+        <button id="saved-nav-btn" class="btn-pill" title="View your saved news">
+          <span>★</span> <span>Saved</span>
+        </button>
+        <button id="auth-nav-btn" class="btn-pill btn-primary">
+          <span>Login / Sign Up</span>
+        </button>
+        <button id="admin-nav-btn" class="btn-pill btn-admin" title="Administrator portal">
+          <span>🔒</span> <span>Admin</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category Filter Bar (7 Categories + All) -->
+  <nav class="category-bar-wrapper">
+    <div class="container category-bar">
+      <button class="cat-btn active" data-category="All">All Briefings</button>
+      <button class="cat-btn" data-category="Technology">Technology</button>
+      <button class="cat-btn" data-category="AI">AI</button>
+      <button class="cat-btn" data-category="Science">Science</button>
+      <button class="cat-btn" data-category="Startups">Startups</button>
+      <button class="cat-btn" data-category="Business">Business</button>
+      <button class="cat-btn" data-category="Cyber Security">Cyber Security</button>
+      <button class="cat-btn" data-category="World News">World News</button>
+    </div>
+  </nav>
+
+  <!-- Feed Header & Refresh Control -->
+  <div class="container">
+    <div class="feed-header">
+      <div>
+        <h1 class="feed-title">Latest Intelligence</h1>
+        <p class="feed-meta" id="feed-count-badge">Loading fresh briefings...</p>
+      </div>
+      <div class="feed-actions">
+        <button id="refresh-btn" class="btn-refresh" title="Fetch new unseen news without reloading page">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          <span>Refresh Feed</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- News Grid (Exactly 21 Cards, 3 columns desktop) -->
+    <main class="news-grid" id="news-grid">
+      <!-- Injected via JavaScript with skeleton loading state -->
+    </main>
+  </div>
+
+  <!-- Built-In AI Summarizer Section -->
+  <section class="summarizer-section" id="summarizer-section">
+    <div class="container">
+      <div class="summarizer-card">
+        <div class="summarizer-badge">
+          <span>✨</span> <span>Gemini Intelligence Core</span>
+        </div>
+        <div class="summarizer-header">
+          <h2>AI News Summarizer</h2>
+          <p>Paste any lengthy article, research publication, or newsletter below for an instant structured summary.</p>
+        </div>
+
+        <textarea 
+          id="summarize-input" 
+          class="summarizer-textarea" 
+          placeholder="Paste full article text, technical release notes, or transcript here (minimum 50 characters)..."
+        ></textarea>
+
+        <div class="summarizer-actions">
+          <span class="char-counter" id="char-counter">0 characters</span>
+          <button id="summarize-btn" class="btn-pill btn-primary">
+            <span>Summarize with AI</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Output Container -->
+        <div id="summarize-result-box" class="summarizer-result-box">
+          <div class="result-header">
+            <h3 id="summary-headline" class="result-headline">Summary Headline</h3>
+            <button id="copy-summary-btn" class="copy-btn">
+              <span>📋</span> <span>Copy Summary</span>
+            </button>
+          </div>
+          <ul id="summary-bullets" class="summary-bullets">
+            <!-- 5 to 7 Key Takeaways injected dynamically -->
+          </ul>
+          <p id="summary-paragraph" class="summary-paragraph">
+            <!-- Executive synthesis paragraph injected dynamically -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       Authentication Modal (Phone / Email with OTP, persistent login)
+       ========================================================================= -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="auth-modal-close" aria-label="Close modal">✕</button>
+      
+      <div class="tabs-header">
+        <button class="tab-btn auth-tab-btn" data-type="email">Email</button>
+        <button class="tab-btn auth-tab-btn" data-type="phone">Phone SMS</button>
+      </div>
+
+      <h2 id="auth-modal-title" style="margin-bottom: 8px;">Create an Account</h2>
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 20px;">
+        Receive a single-use 6-digit verification code.
+      </p>
+
+      <div id="auth-alert" class="form-alert"></div>
+
+      <!-- Step 1: Identifier Input -->
+      <div id="auth-step-identifier">
+        <!-- Email Input -->
+        <div class="form-group" id="email-group">
+          <label class="form-label" for="auth-email">Email Address</label>
+          <input type="email" id="auth-email" class="form-input" placeholder="name@company.com">
+        </div>
+
+        <!-- Phone Input -->
+        <div class="form-group" id="phone-group" style="display: none;">
+          <label class="form-label" for="auth-phone">Phone Number (E.164)</label>
+          <div class="phone-input-row">
+            <select id="country-code-select" class="country-code-select">
+              <option value="+1">🇺🇸 +1 (US)</option>
+              <option value="+91" selected>🇮🇳 +91 (IN)</option>
+              <option value="+44">🇬🇧 +44 (UK)</option>
+              <option value="+49">🇩🇪 +49 (DE)</option>
+              <option value="+81">🇯🇵 +81 (JP)</option>
+              <option value="+61">🇦🇺 +61 (AU)</option>
+              <option value="+33">🇫🇷 +33 (FR)</option>
+              <option value="+86">🇨🇳 +86 (CN)</option>
+            </select>
+            <input type="tel" id="auth-phone" class="form-input" placeholder="9876543210">
+          </div>
+        </div>
+
+        <button id="auth-send-btn" class="btn-pill btn-primary" style="width: 100%; justify-content: center; padding: 12px; margin-top: 8px;">
+          Send Verification Code
+        </button>
+
+        <div class="auth-mode-switch">
+          <span id="auth-switch-prompt">Already have an account?</span>
+          <a id="auth-switch-link">Sign In</a>
+        </div>
+      </div>
+
+      <!-- Step 2: 6-Digit OTP Verification -->
+      <div id="auth-step-otp" style="display: none;">
+        <p style="font-size: 0.88rem; color: var(--text-secondary); text-align: center;">
+          Enter the 6-digit code sent to <br>
+          <strong id="otp-target-display" style="color: var(--accent-cyan);"></strong>
+        </p>
+
+        <div class="otp-boxes">
+          <input type="text" maxlength="1" class="otp-digit-box otp-input" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-digit-box otp-input" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-digit-box otp-input" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-digit-box otp-input" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-digit-box otp-input" inputmode="numeric">
+          <input type="text" maxlength="1" class="otp-digit-box otp-input" inputmode="numeric">
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.84rem;">
+          <button id="otp-back-btn" style="color: var(--text-muted); cursor: pointer;">&larr; Change Details</button>
+          <button id="otp-resend-btn" style="color: var(--accent-cyan); cursor: pointer;" disabled>
+            Resend Code <span id="otp-cooldown-timer">(30s)</span>
+          </button>
+        </div>
+
+        <button id="auth-verify-btn" class="btn-pill btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+          Verify &amp; Proceed
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Saved Articles Drawer (Slide-out panel)
+       ========================================================================= -->
+  <div class="drawer-overlay" id="saved-drawer-overlay"></div>
+  <aside class="drawer-panel" id="saved-drawer-panel">
+    <div class="drawer-header">
+      <div class="drawer-title">★ Saved Briefings</div>
+      <button class="modal-close" id="saved-drawer-close" aria-label="Close saved drawer" style="position: static;">✕</button>
+    </div>
+    <div class="drawer-body" id="saved-drawer-body">
+      <!-- Dynamic list of saved articles -->
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       Admin Modal & Dashboard
+       ========================================================================= -->
+  <div class="modal-overlay" id="admin-modal">
+    <div class="modal-card admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 id="admin-modal-title">Admin Portal</h3>
+        <button class="modal-close" id="admin-modal-close" style="position: static;">✕</button>
+      </div>
+
+      <div class="admin-modal-body">
+        <!-- View 1: Normal User Notice -->
+        <div id="admin-view-notice" class="admin-notice-box">
+          <div class="admin-lock-icon">🔒</div>
+          <h2 class="admin-notice-title">Restricted Administrative Area</h2>
+          <p class="admin-notice-desc">
+            This button is only for admin. Unauthorized access attempts are monitored and recorded.
+          </p>
+          <button id="admin-proceed-login-btn" class="btn-pill btn-admin">
+            Admin Login
+          </button>
+        </div>
+
+        <!-- View 2: Admin Login Form (ID + Password) -->
+        <div id="admin-view-login" style="display: none; max-width: 420px; margin: 0 auto;">
+          <div id="admin-login-alert" class="form-alert"></div>
+          <div class="form-group">
+            <label class="form-label" for="admin-id-input">Admin Identifier</label>
+            <input type="text" id="admin-id-input" class="form-input" placeholder="admin" value="admin">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="admin-pass-input">Admin Password</label>
+            <input type="password" id="admin-pass-input" class="form-input" placeholder="••••••••">
+          </div>
+          <button id="admin-submit-login-btn" class="btn-pill btn-primary" style="width: 100%; justify-content: center; padding: 12px; margin-top: 8px;">
+            Continue to 2FA &rarr;
+          </button>
+          <div style="text-align: center; margin-top: 14px;">
+            <a id="admin-show-qr-link" style="color: var(--accent-cyan); font-size: 0.84rem; text-decoration: underline; cursor: pointer;">
+              Setup / View Authenticator QR Code
+            </a>
+          </div>
+        </div>
+
+        <!-- View 3: Admin 2FA TOTP Verification Step -->
+        <div id="admin-view-2fa" style="display: none; max-width: 420px; margin: 0 auto; text-align: center;">
+          <div id="admin-2fa-alert" class="form-alert"></div>
+          <p style="color: var(--text-secondary); margin-bottom: 16px;">
+            Enter the 6-digit code from Google Authenticator:
+          </p>
+          <input type="text" id="admin-totp-input" class="form-input" style="text-align: center; font-size: 1.5rem; letter-spacing: 6px; font-weight: bold; width: 220px; margin: 0 auto 20px;" maxlength="6" inputmode="numeric">
+          <button id="admin-submit-2fa-btn" class="btn-pill btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+            Verify TOTP &amp; Enter Dashboard
+          </button>
+        </div>
+
+        <!-- View 4: QR Code Setup Helper Screen -->
+        <div id="admin-view-qr" style="display: none; max-width: 440px; margin: 0 auto;">
+          <h4 style="text-align: center; margin-bottom: 8px;">Link Google Authenticator</h4>
+          <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
+            Scan the QR code in Google Authenticator or enter the secret key manually:
+          </p>
+          <div class="qr-setup-box">
+            <img id="admin-qr-image" class="qr-code-img" alt="2FA QR Code">
+            <div style="margin-top: 10px;">
+              <span id="admin-secret-code" class="totp-key-code"></span>
+            </div>
+          </div>
+          <button id="admin-back-from-qr" class="btn-pill btn-primary" style="width: 100%; justify-content: center;">
+            &larr; Back to Admin Login
+          </button>
+        </div>
+
+        <!-- View 5: Admin Dashboard -->
+        <div id="admin-view-dashboard" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div class="admin-tabs-nav" style="margin-bottom: 0;">
+              <button class="admin-tab-btn active" data-tab="users">Registered Users</button>
+              <button class="admin-tab-btn" data-tab="activity">User Activity Logs</button>
+            </div>
+            <button id="admin-logout-btn" class="btn-pill" style="color: var(--accent-rose); border-color: rgba(244, 63, 94, 0.3);">
+              Sign Out Admin
+            </button>
+          </div>
+
+          <!-- Tab Pane 1: Registered Users -->
+          <div id="admin-tab-users-pane">
+            <div class="admin-table-container">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Type</th>
+                    <th>Identifier (Phone / Email)</th>
+                    <th>Signup Date</th>
+                    <th>Last Login</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-users-tbody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab Pane 2: User Activity Log with Live Search & Filter -->
+          <div id="admin-tab-activity-pane" style="display: none;">
+            <div class="admin-search-bar">
+              <input type="text" id="admin-activity-search" class="admin-search-input" placeholder="Filter by user, article headline, or URL...">
+            </div>
+            <div class="admin-table-container">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Visitor</th>
+                    <th>Article Headline</th>
+                    <th>Article URL</th>
+                    <th>Category</th>
+                    <th>Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-activity-tbody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/admin.js"></script>
+  <script src="/js/home.js"></script>
+</body>
+</html>

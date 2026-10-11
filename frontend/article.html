@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Intelligence — AI NEWS LETTER</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    .article-page-container {
+      max-width: 860px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+    }
+    .article-back-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .article-hero-header {
+      margin-bottom: 28px;
+    }
+    .article-headline-main {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 14px 0 16px;
+      color: var(--text-primary);
+    }
+    .article-meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      flex-wrap: wrap;
+    }
+    .article-hero-image {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      margin-bottom: 36px;
+      box-shadow: var(--shadow-md);
+    }
+    .article-hero-placeholder {
+      width: 100%;
+      height: 320px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-md);
+    }
+    .ai-summary-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color-glow);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-cyan);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .read-more-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .btn-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 36px;
+      border-radius: var(--radius-full);
+      background: var(--gradient-accent);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1.05rem;
+      box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35);
+      transition: var(--transition);
+    }
+    .btn-read-more:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(56, 189, 248, 0.5);
+    }
+    @media (max-width: 768px) {
+      .article-headline-main {
+        font-size: 1.85rem;
+      }
+      .article-hero-image {
+        height: 240px;
+      }
+      .ai-summary-card {
+        padding: 24px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="/home.html" class="nav-brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">AI NEWS <span>LETTER</span></div>
+      </a>
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" title="Toggle theme mode" aria-label="Toggle theme">☀️</button>
+        <a href="/home.html" class="btn-pill">
+          <span>&larr;</span> <span>Back to Feed</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article View Container -->
+  <div class="article-page-container">
+    
+    <!-- Loading State -->
+    <div id="article-loading" style="text-align: center; padding: 100px 20px;">
+      <div class="skeleton-card" style="height: 400px; margin-bottom: 24px;"></div>
+      <p style="color: var(--text-muted); font-size: 1rem;">Analyzing and synthesizing briefing with AI...</p>
+    </div>
+
+    <!-- Loaded Article Content -->
+    <article id="article-content" style="display: none;">
+      <div class="article-back-nav">
+        <span class="card-tag" id="article-category-badge" style="position: static;">Category</span>
+        <button id="article-save-btn" class="btn-pill" style="color: var(--accent-amber);">
+          <span>☆</span> <span>Save Article</span>
+        </button>
+      </div>
+
+      <header class="article-hero-header">
+        <h1 class="article-headline-main" id="article-title">Loading Headline...</h1>
+        <div class="article-meta-bar">
+          <span>Published by <strong id="article-source" style="color: var(--accent-cyan);">Source</strong></span>
+          <span>&bull;</span>
+          <span id="article-date">Date</span>
+          <span>&bull;</span>
+          <span>Verified Intelligence</span>
+        </div>
+      </header>
+
+      <!-- Featured Visual -->
+      <div id="article-media-container"></div>
+
+      <!-- AI-Generated Summary (Gemini API with DB Cache) -->
+      <section class="ai-summary-card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div class="ai-badge">
+            <span>✨</span> <span>Gemini Executive AI Summary</span>
+          </div>
+          <button id="copy-article-summary-btn" class="copy-btn">
+            <span>📋</span> <span>Copy Summary</span>
+          </button>
+        </div>
+
+        <h3 id="ai-headline" class="result-headline" style="margin-bottom: 16px; font-size: 1.45rem;">
+          Synthesizing Insights...
+        </h3>
+
+        <div style="margin: 20px 0;">
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 10px;">
+            Key Takeaways:
+          </h4>
+          <ul id="ai-bullets" class="summary-bullets">
+            <!-- 5 to 7 Key Takeaways injected dynamically -->
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 8px;">
+            Strategic Analysis:
+          </h4>
+          <p id="ai-paragraph" class="summary-paragraph">
+            <!-- Strategic synthesis paragraph -->
+          </p>
+        </div>
+      </section>
+
+      <!-- Read Original Article Button -->
+      <div class="read-more-wrapper">
+        <a id="read-more-link" class="btn-read-more" href="#" target="_blank" rel="noopener noreferrer">
+          <span>Read Full Article at Source</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+    </article>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/article.js"></script>
+</body>
+</html>
