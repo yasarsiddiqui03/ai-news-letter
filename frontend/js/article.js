@@ -14,7 +14,7 @@ const ArticlePage = {
     const rawUrl = params.get("url");
 
     if (!id && !rawUrl) {
-      window.location.href = "/home.html";
+      window.location.href = "home.html";
       return;
     }
 
@@ -59,7 +59,7 @@ const ArticlePage = {
           <div style="text-align: center; padding: 60px 20px;">
             <h2 style="color: var(--accent-rose); margin-bottom: 12px;">Failed to Load Article</h2>
             <p style="color: var(--text-muted); margin-bottom: 24px;">${this.escapeHtml(err.message)}</p>
-            <a href="/home.html" class="btn-pill btn-primary">&larr; Back to News Feed</a>
+            <a href="home.html" class="btn-pill btn-primary">&larr; Back to News Feed</a>
           </div>
         `;
       }

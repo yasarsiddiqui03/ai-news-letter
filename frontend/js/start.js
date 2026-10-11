@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       document.body.classList.add("page-fade-out");
       setTimeout(() => {
-        window.location.href = "/home.html";
+        window.location.href = "home.html";
       }, 500);
     });
   }

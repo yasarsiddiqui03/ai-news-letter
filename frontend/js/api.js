@@ -39,6 +39,14 @@ const API = {
     }
   },
 
+  // Detect environment base URL (handles file:/// direct opening)
+  getBaseUrl() {
+    if (typeof window !== "undefined" && (window.location.protocol === "file:" || !window.location.origin || window.location.origin === "null")) {
+      return "http://localhost:5000";
+    }
+    return "";
+  },
+
   // HTTP Request Helper
   async request(endpoint, options = {}) {
     const headers = options.headers || {};
@@ -62,8 +70,11 @@ const API = {
     options.headers = headers;
     options.credentials = "include"; // Include cookies
 
+    const baseUrl = this.getBaseUrl();
+    const targetUrl = endpoint.startsWith("http") ? endpoint : `${baseUrl}${endpoint}`;
+
     try {
-      const response = await fetch(endpoint, options);
+      const response = await fetch(targetUrl, options);
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {

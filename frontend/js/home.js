@@ -229,10 +229,10 @@ const Home = {
       card.addEventListener("click", (e) => {
         if (e.target.closest(".card-save-btn")) return;
         if (art.id) {
-          window.location.href = `/article.html?id=${art.id}`;
+          window.location.href = `article.html?id=${art.id}`;
         } else {
           // If search result without DB id, encode URL
-          window.location.href = `/article.html?url=${encodeURIComponent(art.url)}`;
+          window.location.href = `article.html?url=${encodeURIComponent(art.url)}`;
         }
       });
 
@@ -336,7 +336,7 @@ const Home = {
 
         itemEl.addEventListener("click", (e) => {
           if (e.target.classList.contains("unsave-btn")) return;
-          window.location.href = `/article.html?url=${encodeURIComponent(item.url)}`;
+          window.location.href = `article.html?url=${encodeURIComponent(item.url)}`;
         });
 
         const unsaveBtn = itemEl.querySelector(".unsave-btn");
