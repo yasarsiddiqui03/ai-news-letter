@@ -61,26 +61,40 @@
 
 /* Light Mode Overrides */
 [data-theme="light"] {
-  --bg-void: #f1f5f9;
-  --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
+  --bg-void: #f8fafc;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f1f5f9;
   --bg-surface: #ffffff;
-  --bg-surface-hover: #f1f5f9;
-  --bg-glass: rgba(255, 255, 255, 0.9);
-  --bg-glass-card: rgba(255, 255, 255, 0.9);
+  --bg-surface-hover: #e2e8f0;
+  --bg-glass: rgba(255, 255, 255, 0.95);
+  --bg-glass-card: rgba(255, 255, 255, 0.95);
 
-  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.1);
   --border-glow: rgba(0, 242, 254, 0.6);
 
   --text-primary: #090d16;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
+  --text-secondary: #1e293b;
+  --text-muted: #475569;
 
   --gradient-card: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   --gradient-card-hover: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .nav-brand {
+  color: #090d16 !important;
+}
+
+[data-theme="light"] .feed-title {
+  background: linear-gradient(135deg, #090d16 20%, #334155 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="light"] .feed-meta {
+  color: #334155 !important;
 }
 
 /* Base Styles */
