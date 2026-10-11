@@ -266,39 +266,17 @@
           <button id="admin-submit-login-btn" class="btn-pill btn-primary" style="width: 100%; justify-content: center; padding: 12px; margin-top: 8px;">
             Continue to 2FA &rarr;
           </button>
-          <div style="text-align: center; margin-top: 14px;">
-            <a id="admin-show-qr-link" style="color: var(--accent-cyan); font-size: 0.84rem; text-decoration: underline; cursor: pointer;">
-              Setup / View Authenticator QR Code
-            </a>
-          </div>
         </div>
 
         <!-- View 3: Admin 2FA TOTP Verification Step -->
         <div id="admin-view-2fa" style="display: none; max-width: 420px; margin: 0 auto; text-align: center;">
           <div id="admin-2fa-alert" class="form-alert"></div>
           <p style="color: var(--text-secondary); margin-bottom: 16px;">
-            Enter the 6-digit code from Google Authenticator:
+            Enter the 6-digit code from Google Authenticator on your mobile:
           </p>
           <input type="text" id="admin-totp-input" class="form-input" style="text-align: center; font-size: 1.5rem; letter-spacing: 6px; font-weight: bold; width: 220px; margin: 0 auto 20px;" maxlength="6" inputmode="numeric">
           <button id="admin-submit-2fa-btn" class="btn-pill btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
             Verify TOTP &amp; Enter Dashboard
-          </button>
-        </div>
-
-        <!-- View 4: QR Code Setup Helper Screen -->
-        <div id="admin-view-qr" style="display: none; max-width: 440px; margin: 0 auto;">
-          <h4 style="text-align: center; margin-bottom: 8px;">Link Google Authenticator</h4>
-          <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem;">
-            Scan the QR code in Google Authenticator or enter the secret key manually:
-          </p>
-          <div class="qr-setup-box">
-            <img id="admin-qr-image" class="qr-code-img" alt="2FA QR Code">
-            <div style="margin-top: 10px;">
-              <span id="admin-secret-code" class="totp-key-code"></span>
-            </div>
-          </div>
-          <button id="admin-back-from-qr" class="btn-pill btn-primary" style="width: 100%; justify-content: center;">
-            &larr; Back to Admin Login
           </button>
         </div>
 

@@ -57,17 +57,12 @@ def admin_login():
     }
     temp_token = jwt.encode(temp_payload, Config.JWT_SECRET, algorithm="HS256")
 
-    resp_data = {
+    return jsonify({
         "success": True,
         "require_2fa": True,
         "temp_token": temp_token,
-        "message": "Password verified. Please enter your 6-digit Authenticator TOTP code."
-    }
-    if Config.DEV_MODE:
-        totp = pyotp.TOTP(Config.ADMIN_TOTP_SECRET)
-        resp_data["dev_totp_code"] = totp.now()
-
-    return jsonify(resp_data)
+        "message": "Password verified. Please enter the 6-digit code from your Authenticator app."
+    })
 
 @admin_bp.route("/verify-2fa", methods=["POST"])
 def admin_verify_2fa():

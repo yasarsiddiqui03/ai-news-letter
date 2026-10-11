@@ -201,14 +201,9 @@ const Auth = {
       this.showStep("otp");
       this.startCooldown(res.cooldown || 30);
 
-      // If development fallback provides dev_otp, announce it for easy zero-friction testing
-      if (res.dev_otp) {
-        API.showToast(`[Dev Mode] Verification OTP is: ${res.dev_otp}`, "info");
-        // Pre-fill digit boxes in dev mode for maximum convenience
-        this.fillOtpInputs(res.dev_otp);
-      } else {
-        API.showToast(res.message || "Verification code sent!", "success");
-      }
+      // Keep digit boxes clean and empty so user enters OTP manually
+      this.clearOtpInputs();
+      API.showToast(res.message || "Verification code sent!", "success");
     } catch (err) {
       this.showAlert(err.message || "Failed to send verification code.", "error");
     } finally {

